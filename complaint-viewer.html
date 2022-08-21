@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Complaint Viewer</title>
+</head>
+<body>
+    <nav><a href = 'create-meeting.html'>Create Meetings</a>  <a href = "complaint-viewer.html">View All Submitted Complaints</a></nav>
+    <!-- Council Members have access to this page which they can set priority on complaints
+        Another page called create meetings will be linked to the complaint viewer so meetings can be scheduled -->
+        <h1>Complaint Viewer</h1>
+
+        <table>
+            <thead>
+
+                <tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Description</th><th>Status</th><th>Meeting ID</th><th>Set Priority</th></tr>
+       
+            </thead>     
+        <tbody id = "complaintTableBody">
+
+        </tbody>
+    </table>
+</body>
+<script>
+
+const complaintTableBody = document.getElementById("complaintTableBody");
+
+async function getComplaints(){
+    const httpResponse = await fetch("http://localhost:8080/complaints");
+    const complaints = await httpResponse.json();
+    console.log(complaints);
+    return complaints;
+}
+
+async function renderComplaintTable(){
+
+    const testComplaints = await getComplaints();
+    testComplaints.sort((a,b)=> (a.complaintId>b.complaintId) ? 1:-1)
+
+    for(var i = 0; i < testComplaints.length; i++){
+
+        const complaintRow = document.createElement("tr");
+    
+
+        const complaintIdData = document.createElement("td");
+        complaintIdData.innerText = testComplaints[i].complaintId;
+        complaintIdData.setAttribute("id","complaintId");
+
+        const complaintFNameData = document.createElement("td");
+        complaintFNameData.innerText = testComplaints[i].fname;
+
+        const complaintLNameData = document.createElement("td");
+        complaintLNameData.innerText = testComplaints[i].lname;
+
+        const complaintEmailData = document.createElement("td");
+        complaintEmailData.innerText = testComplaints[i].email;
+
+        const complaintDescriptionData = document.createElement("td");
+        complaintDescriptionData.innerText = testComplaints[i].description;
+
+        const complaintStatusData = document.createElement("td");
+        complaintStatusData.innerText = testComplaints[i].status;
+        complaintStatusData.setAttribute("id","status");
+
+
+        const complaintMeetingIdData = document.createElement("td");
+        complaintMeetingIdData.innerText = testComplaints[i].meetingId;
+
+        const complaintStatusHighBtn = document.createElement("button");
+        if(testComplaints[i].status === "HIGH"){
+            complaintStatusHighBtn.disabled = true;
+        }
+        complaintStatusHighBtn.innerHTML = "HIGH";
+        complaintStatusHighBtn.onclick=function(){
+            handleButton(this.parentNode.childNodes[0].innerHTML,"HIGH");    
+        };
+
+        const complaintStatusLowBtn = document.createElement("button");
+        complaintStatusLowBtn.innerHTML = "LOW";
+        if(testComplaints[i].status === "LOW"){
+            complaintStatusLowBtn.disabled = true;
+        }
+        complaintStatusLowBtn.onclick=function(){
+            handleButton(this.parentNode.childNodes[0].innerHTML,"LOW");   
+        };
+        
+        const complaintStatusIgnoredBtn = document.createElement("button");
+        complaintStatusIgnoredBtn.innerHTML = "IGNORED";
+        if(testComplaints[i].status === "IGNORED"){
+            complaintStatusIgnoredBtn.disabled = true;
+        }
+        complaintStatusIgnoredBtn.onclick=function(){
+            handleButton(this.parentNode.childNodes[0].innerHTML,"IGNORED");    
+        };
+
+        complaintRow.appendChild(complaintIdData);
+        complaintRow.appendChild(complaintFNameData);
+        complaintRow.appendChild(complaintLNameData);
+        complaintRow.appendChild(complaintEmailData);
+        complaintRow.appendChild(complaintDescriptionData);
+        complaintRow.appendChild(complaintStatusData);
+        complaintRow.appendChild(complaintMeetingIdData);
+        complaintRow.appendChild(complaintStatusHighBtn);
+        complaintRow.appendChild(complaintStatusLowBtn);
+        complaintRow.appendChild(complaintStatusIgnoredBtn);
+
+        complaintTableBody.appendChild(complaintRow);
+
+    }
+
+    async function handleButton(complaintId,setStatus){
+        console.log(complaintId,setStatus);
+        const status = {status:setStatus};
+        const response = await fetch(`http://localhost:8080/complaints/${complaintId}`,{
+            method:"PUT", 
+            body: JSON.stringify(status),
+            headers:{
+                "Content-Type":"application/json"
+            }
+        })
+
+        if(response.status === 200){
+            location.reload();
+        }
+
+    }
+
+
+}
+
+
+
+renderComplaintTable();
+</script>
