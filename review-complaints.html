@@ -4,7 +4,7 @@
     <title>Complaint Viewer</title>
 </head>
 <body>
-    <nav><a href = 'create-meeting.html'>Create Meetings</a>  <a href = "complaint-viewer.html">View All Submitted Complaints</a></nav>
+    <nav><a href = 'create-meeting.html'>Create Meetings</a></nav>
     <!-- Council Members have access to this page which they can set priority on complaints
         Another page called create meetings will be linked to the complaint viewer so meetings can be scheduled -->
         <h1>Complaint Viewer</h1>
@@ -34,7 +34,8 @@ async function getComplaints(){
 async function renderComplaintTable(){
 
     const testComplaints = await getComplaints();
-    testComplaints.sort((a,b)=> (a.complaintId>b.complaintId) ? 1:-1)
+    //This ensures that the complaints do not reorder after setting Priority Status
+    testComplaints.sort((a,b)=> (a.complaintId>b.complaintId) ? 1:-1);
 
     for(var i = 0; i < testComplaints.length; i++){
 

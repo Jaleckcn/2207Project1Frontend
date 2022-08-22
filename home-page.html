@@ -29,8 +29,46 @@ where they can also set status of complaints and create meetings
 
     const meetingTableBody = document.getElementById("meetingTableBody");
 
+    //pulling a list of all meetings that were created from create-meeting html.
+    async function getMeetings(){
+        const httpResponse = await fetch("http://localhost:8080/meetings")
+        const meetings = await httpResponse.json();
+        console.log(meetings);
+        return meetings;
+
+    }
+
     async function renderMeetingTable(){
         
+        const testMeetings = await getMeetings();
+        //
+       
+        for (var i = 0; i <testMeetings.length;i++){
+
+            const meetingRow = document.createElement("tr");
+
+            const meetingIdData = document.createElement("td");
+            meetingIdData.innerText = testMeetings[i].meetingId;
+
+            const meetingAddressData = document.createElement("td");
+            meetingAddressData.innerText = testMeetings[i].address;
+            
+            const meetingTimeData = document.createElement("td");
+            meetingTimeData.innerText = testMeetings[i].time;
+
+            const meetingSummaryData = document.createElement("td");
+            meetingSummaryData.innerText = testMeetings[i].summary;
+
+            meetingRow.appendChild(meetingId);
+            meetingRow.appendChild(address);
+            meetingRow.appendChild(time);
+            meetingRow.appendChild(summary);
+
+            meetingTableBody.appendChild(meetingRow);
+
+        }
+    
     }
+    renderMeetingTable();
 
 </script>
