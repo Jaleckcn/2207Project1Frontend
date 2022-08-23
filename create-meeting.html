@@ -3,35 +3,45 @@
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <title>Create Meeting</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!--Council Members have access to this page where they can schedule meetings  -->
+    <link rel="stylesheet" href="styles.css">
     <nav>
         <a href = "home-page.html">Musutafu Town Hall Home Page</a> 
          <a href = "review-complaints.html">View All Submitted Complaints</a>
     </nav>
 
     <div id ="liveAlert"></div>
+
     <h1>Create Meeting</h1>
 
     <form>
         <fieldset>
-            <legend>Meeting Form</legend>
-
+        <div class = "legendcenter">
+            <legend><b>Meeting Form</b></legend>
+        </div>
+        <div class = "center">
             <label for="inputAddress">Address</label>
-            <input id="inputAddress" type="text" placeholder="UA Amphitheater"/>
-
+            <input id="inputAddress" type="text" placeholder="UA Amphitheater" size = "50px"/>
+        </div>
+        <div class = "center">
             <label for="inputDate">Scheduled meeting date:</label>
 
             <input type="date" id="inputDate" name="meeting-date" value="2018-06-12">
             <input type="time" id="inputTime" name="meeting-time" value="19:30">
-
+        </div>
+        <div class = "center">
             <label for="inputSummary">Summary</label>
-            <textarea rows="6" id = "inputSummary" placeholder="Include complaint ID numbers that will be addressed here"></textarea>
-        
+        </div>
+        <div class = "center">  
+            <textarea rows="6" cols="50" id = "inputSummary" placeholder="Include complaint ID numbers that will be addressed here"></textarea>
+        </div>  
         </fieldset>
-
-        <button>Submit</button>
+        <div class = "center">
+            <button style="width:120px;height:50px;">Submit</button>
+        </div>
     </form>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>

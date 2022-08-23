@@ -3,8 +3,10 @@
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <title>File a Complaint</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <link rel="stylesheet" href="styles.css">
     <nav><a href = "home-page.html">Musutafu Town Hall Home Page</a></nav>
     
     <div id ="liveAlert"></div>
@@ -14,25 +16,27 @@
     <form>
 
         <fieldset>
-            <legend>Complaint Form</legend>
-    
+            <legend class="legendcenter">Complaint Form</legend>
+        <div class = "center">
             <p>You may leave First, Last Name and Email blank if you wish to remain anonymous</p>
             <label for="inputFname">First Name</label>
             <input id="inputFname" type="text" placeholder="Yagi"/>
 
             <label for="inputLname">Last Name</label>
             <input id="inputLname" type="text" placeholder="Toshinori"/>
-
-
+        </div>
+        <div class="center">
             <label for="inputEmail">Email</label>
-            <input id="inputEmail" type="text" placeholder="example123@gmail.com"/>
-
+            <input id="inputEmail" type="text" placeholder="example123@gmail.com" size="70px"/>
+        </div>
+        <div class="center">
             <label for="inputDescription">Complaint Description</label>
-            <textarea rows="6" id = "inputDescription" placeholder="Villains vandalized Endor Supermarket" required></textarea>
+            <textarea rows="6" cols="80px" id = "inputDescription" placeholder="Villains vandalized Endor Supermarket" required></textarea>
+        </div>
         </fieldset>
-
-        <button class = "btn btn-primary">Submit</button>
-
+        <div class = "center">
+            <button class = "btn btn-primary" style="width:100px;height:50px;" >Submit</button>
+        </div>
     </form>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>

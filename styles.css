@@ -1,5 +1,13 @@
+/* html{
+   
+} */
+#headerbackground{
+    width:100%;
+    height:100px;
+    background:url(https://wallpaperaccess.com/full/9961.jpg);
+}
 h1 {
-    border-style: dotted;
+    border-style: solid;
     margin:auto;
     text-align:center;
     font-size: 55px;
@@ -22,23 +30,46 @@ button{
     width: 50%;
 }
 body{
-    background-image: url("https://static.wikia.nocookie.net/bokunoheroacademia/images/0/0c/U.A._and_Heights_Alliance.png/revision/latest?cb=20180701163845");
+ background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIxBlmhL-yH7I3-Flrsv2hzLLJFW6RpZKcLQ&usqp=CAU);
+ background-repeat: no-repeat;
+ background-size: cover;
 }
 table{
     background-color: rgb(172, 195, 238);
-    margin: auto;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
     border-collapse: collapse;
 }
 th {
-    font-size: 25px;
-    width: 150px;
-    border: dotted;
+    font-size: 20px;
+    width: auto;
+    border: solid;
     border-collapse: collapse;
+}
+.setpriority{
+    width: 250px;
 }
 td {
     font-weight: bold;
     font-size: 20;
-    border: dotted;
+    border: solid;
     border-collapse: collapse;
+}
+.center {
+    margin: auto;
+    width: 70%;
+    border: 3px solid black;
+    padding: 10px;
+    text-align: center;
+  }
+.legendcenter{
+    margin: 50px;
+    padding: 3px;
+    text-align: center;
+} 
+.logintable{
+    border: 3px solid black;
+    width: 50%;
 }

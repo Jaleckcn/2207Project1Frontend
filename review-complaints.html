@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <title>Complaint Viewer</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav><a href = 'create-meeting.html'>Create Meetings</a></nav>
+    <link rel="stylesheet" href="styles.css">
+    <nav><a href = "home-page.html">Musutafu Town Hall Home Page</a> <a href = 'create-meeting.html'>Create Meetings</a></nav>
     <!-- Council Members have access to this page which they can set priority on complaints
         Another page called create meetings will be linked to the complaint viewer so meetings can be scheduled -->
         <h1>Complaint Viewer</h1>
@@ -12,7 +15,7 @@
         <table>
             <thead>
 
-                <tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Description</th><th>Status</th><th>Meeting ID</th><th>Set Priority</th></tr>
+                <tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Description</th><th>Status</th><th>Meeting ID</th><th class = "setpriority">Set Priority</th></tr>
        
             </thead>     
         <tbody id = "complaintTableBody">
@@ -20,6 +23,7 @@
         </tbody>
     </table>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 <script>
 
 const complaintTableBody = document.getElementById("complaintTableBody");
@@ -67,6 +71,8 @@ async function renderComplaintTable(){
         complaintMeetingIdData.innerText = testComplaints[i].meetingId;
 
         const complaintStatusHighBtn = document.createElement("button");
+        complaintStatusHighBtn.style.width ='60px';
+        complaintStatusHighBtn.style.fontSize = '10px';
         if(testComplaints[i].status === "HIGH"){
             complaintStatusHighBtn.disabled = true;
         }
@@ -77,6 +83,8 @@ async function renderComplaintTable(){
 
         const complaintStatusLowBtn = document.createElement("button");
         complaintStatusLowBtn.innerHTML = "LOW";
+        complaintStatusLowBtn.style.width ='60px';
+        complaintStatusLowBtn.style.fontSize = '10px';
         if(testComplaints[i].status === "LOW"){
             complaintStatusLowBtn.disabled = true;
         }
@@ -86,6 +94,8 @@ async function renderComplaintTable(){
         
         const complaintStatusIgnoredBtn = document.createElement("button");
         complaintStatusIgnoredBtn.innerHTML = "IGNORED";
+        complaintStatusIgnoredBtn.style.width ='60px';
+        complaintStatusIgnoredBtn.style.fontSize = '10px';
         if(testComplaints[i].status === "IGNORED"){
             complaintStatusIgnoredBtn.disabled = true;
         }
