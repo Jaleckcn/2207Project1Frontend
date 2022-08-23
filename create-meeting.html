@@ -23,11 +23,11 @@
 
             <label for="inputDate">Scheduled meeting date:</label>
 
-            <input type="datetime-local" id="inputDate"
-                   name="meeting-time" value="2018-06-12T19:30">
+            <input type="date" id="inputDate" name="meeting-date" value="2018-06-12">
+            <input type="time" id="inputTime" name="meeting-time" value="19:30">
 
             <label for="inputSummary">Summary</label>
-            <textarea rows="6" id = "inputDescription" placeholder="Include complaint ID numbers that will be addressed here"></textarea>
+            <textarea rows="6" id = "inputSummary" placeholder="Include complaint ID numbers that will be addressed here"></textarea>
         
         </fieldset>
 
@@ -51,6 +51,7 @@
     liveAlert.append(wrapper)}
 
     const inputAddress = document.getElementById("inputAddress");
+    const inputDate = document.getElementById("inputDate");
     const inputTime = document.getElementById("inputTime");
     const inputSummary = document.getElementById("inputSummary");
     
@@ -58,12 +59,16 @@
         event.preventDefault();
 
         const address = inputAddress.value;
+        const date = inputDate.value;
         const time = inputTime.value;
         const summary = inputSummary.value;
 
-        const meeting = {meetingId:0, address, time, summary};
+        const fullDate = new Date(date + " " + time);
+        const epochDate = fullDate.getTime()/1000.0;
 
-        const response = await fetch("http://localhost:8080/complaints/",{
+        const meeting = {meetingId:0, address, time:epochDate, summary};
+
+        const response = await fetch("http://localhost:8080/meetings",{
             method:"POST", 
             body: JSON.stringify(meeting),
             headers:{
@@ -74,6 +79,7 @@
         if(response.status === 201){
             alert("Meeting has been created");
             inputAddress.value = "";
+            inputDate.value="";
             inputTime.value = "";
             inputSummary.value = "";
             console.log(meeting);

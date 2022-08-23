@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <title>Musutafu Town Hall Home Page</title>
 </head>
 <body>
@@ -18,6 +19,7 @@ where they can also set status of complaints and create meetings
 
     <table>
         <thead>
+            <h2>Upcoming Meetings (Subject to Change)</h2>
             <tr><th>Meeting ID</th><th>Address</th><th>Time</th><th>Summary</th></tr>  
         </thead>
         <tbody id="meetingTableBody">
@@ -54,15 +56,16 @@ where they can also set status of complaints and create meetings
             meetingAddressData.innerText = testMeetings[i].address;
             
             const meetingTimeData = document.createElement("td");
-            meetingTimeData.innerText = testMeetings[i].time;
+            const readableDate = new Date(testMeetings[i].time*1000); 
+            meetingTimeData.innerText = readableDate.toLocaleString();
 
             const meetingSummaryData = document.createElement("td");
             meetingSummaryData.innerText = testMeetings[i].summary;
 
-            meetingRow.appendChild(meetingId);
-            meetingRow.appendChild(address);
-            meetingRow.appendChild(time);
-            meetingRow.appendChild(summary);
+            meetingRow.appendChild(meetingIdData);
+            meetingRow.appendChild(meetingAddressData);
+            meetingRow.appendChild(meetingTimeData);
+            meetingRow.appendChild(meetingSummaryData);
 
             meetingTableBody.appendChild(meetingRow);
 

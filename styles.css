@@ -1,0 +1,44 @@
+h1 {
+    border-style: dotted;
+    margin:auto;
+    text-align:center;
+    font-size: 55px;
+}
+h2 {
+    margin:auto;
+    text-align: center;
+    font-size: 40px;
+}
+h3 {
+    margin: auto;
+    text-align: center;
+}
+nav {
+    margin: auto;
+}
+button{
+    background-color: rgb(172, 195, 238);
+    font-size: 30px;
+    width: 50%;
+}
+body{
+    background-image: url("https://static.wikia.nocookie.net/bokunoheroacademia/images/0/0c/U.A._and_Heights_Alliance.png/revision/latest?cb=20180701163845");
+}
+table{
+    background-color: rgb(172, 195, 238);
+    margin: auto;
+    text-align: center;
+    border-collapse: collapse;
+}
+th {
+    font-size: 25px;
+    width: 150px;
+    border: dotted;
+    border-collapse: collapse;
+}
+td {
+    font-weight: bold;
+    font-size: 20;
+    border: dotted;
+    border-collapse: collapse;
+}
