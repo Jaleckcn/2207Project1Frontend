@@ -15,7 +15,7 @@
         <table>
             <thead>
 
-                <tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Description</th><th>Status</th><th>Meeting ID</th><th class = "setpriority">Set Priority</th></tr>
+                <tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Email</th><th>Description</th><th>Status</th><th>Meeting ID</th><th class = "setpriority">Set Priority and Attach Meetings</th></tr>
        
             </thead>     
         <tbody id = "complaintTableBody">
@@ -102,7 +102,23 @@ async function renderComplaintTable(){
         complaintStatusIgnoredBtn.onclick=function(){
             handleButton(this.parentNode.childNodes[0].innerHTML,"IGNORED");    
         };
+        
+        //Attach complaint to meetings
+        const complaintUpdateInput = document.createElement("input");
+        complaintUpdateInput.setAttribute("id",`input_${testComplaints[i].complaintId}`);
+        complaintUpdateInput.type = "number";
+        complaintUpdateInput.placeholder = "Enter Meeting ID number";
 
+        const complaintUpdateBtn = document.createElement("button");
+        complaintUpdateBtn.innerHTML = "Update";
+        complaintUpdateBtn.style.width ='60px';
+        complaintUpdateBtn.style.fontSize = '10px';
+        complaintUpdateBtn.dataset.complaintId = testComplaints[i].complaintId;
+        complaintUpdateBtn.dataset.input = complaintUpdateInput;
+        complaintUpdateBtn.onclick=function(){
+            updateButton(complaintUpdateBtn.dataset.complaintId);
+        }
+        
         complaintRow.appendChild(complaintIdData);
         complaintRow.appendChild(complaintFNameData);
         complaintRow.appendChild(complaintLNameData);
@@ -113,6 +129,9 @@ async function renderComplaintTable(){
         complaintRow.appendChild(complaintStatusHighBtn);
         complaintRow.appendChild(complaintStatusLowBtn);
         complaintRow.appendChild(complaintStatusIgnoredBtn);
+        complaintRow.appendChild(complaintUpdateInput);
+        complaintRow.appendChild(complaintUpdateBtn);
+    
 
         complaintTableBody.appendChild(complaintRow);
 
@@ -132,7 +151,44 @@ async function renderComplaintTable(){
         if(response.status === 200){
             location.reload();
         }
+    }
 
+    
+    async function getComplaintById(){
+    const httpResponse = await fetch(`http://localhost:8080/complaints/${complaintId}`);
+    const complaint = await httpResponse.json();
+    console.log(complaint);
+    return complaint;
+    }
+
+
+    async function updateButton(complaintId){
+
+        const meetingId = document.getElementById(`input_${complaintId}`).value;
+        const httpResponse = await fetch("http://localhost:8080/meetings")
+        const meetings = await httpResponse.json();
+
+        console.log(meetings);
+       for(let meeting of meetings){
+            if(meeting.meetingId == meetingId){
+                const response = await fetch(`http://localhost:8080/complaints/${complaintId}/${meetingId}`,{
+                    method: "PUT",
+                    body: JSON.stringify(meetingId),
+                    headers:{
+                    "Content-Type":"application/json"
+                    }
+                });
+
+                console.log(response);
+                if(response.status === 200){
+                alert("Meeting Id Updated", 'success');    
+                location.reload();
+                return;
+                }
+            }
+            
+        }
+        alert("Meeting ID doesn't exist", 'danger');
     }
 
 

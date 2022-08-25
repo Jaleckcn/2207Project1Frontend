@@ -26,7 +26,7 @@
     <table>
         <thead>
             <h2>Upcoming Meetings (Subject to Change)</h2>
-            <tr><th>Meeting ID</th><th>Address</th><th>Time</th><th>Summary</th></tr>  
+            <tr><th>Meeting ID</th><th>Address</th><th>Time</th><th>Summary</th><th>Attached Complaint Id(s)</th></tr>  
         </thead>
         <tbody id="meetingTableBody">
 
@@ -70,17 +70,47 @@ async function renderMeetingTable(){
         const meetingSummaryData = document.createElement("td");
         meetingSummaryData.innerText = testMeetings[i].summary;
 
+        const complaintIdData = document.createElement("td");
+        complaintIdData.innerText = await getAllComplaints(testMeetings[i].meetingId);
+        
+
         meetingRow.appendChild(meetingIdData);
         meetingRow.appendChild(meetingAddressData);
         meetingRow.appendChild(meetingTimeData);
         meetingRow.appendChild(meetingSummaryData);
+        meetingRow.appendChild(complaintIdData);
 
         meetingTableBody.appendChild(meetingRow);
 
+
+    }
+
+
+    async function getAllComplaints(meetingId){
+    const httpResponse = await fetch(`http://localhost:8080/complaints?meetingId=${meetingId}`);
+    const complaints = await httpResponse.json();
+    let output = "";
+
+    if(complaints.length == 1){
+        output = complaints[0].complaintId;
+    }else{
+        for(var i=0; i<complaints.length;i++){
+            if(i+1==complaints.length){
+                output += complaints[i].complaintId;
+            }else{
+                output += complaints[i].complaintId + ", ";   
+            }
+        
+        }
+    }   
+    console.log(output);
+    return output;
     }
  
 }
-   renderMeetingTable();
+
+renderMeetingTable();
+
 </script>
 
 </html>

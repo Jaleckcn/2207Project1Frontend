@@ -23,69 +23,6 @@
 
     New Features under construction
 
-    <table>
-        <thead>
-            <h2>Attach Complaints to Meetings</h2>
-            <tr><th>Meeting ID</th><th>Address</th><th>Time</th><th>Summary</th><th>Attach Complaint(s)</th></tr>  
-        </thead>
-        <tbody id="meetingTableBody">
-
-        </tbody>
-    </table>
-
-</body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-<script>
-const meetingTableBody = document.getElementById("meetingTableBody");
-
-//pulling a list of all meetings that were created from create-meeting html.
-async function getMeetings(){
-    const httpResponse = await fetch("http://localhost:8080/meetings")
-    const meetings = await httpResponse.json();
-    console.log(meetings);
-    return meetings;
-
-}
-
-async function renderMeetingTable(){
-    console.log("getMeetings")
-    const testMeetings = await getMeetings();
-    //
-   
-    for (var i = 0; i <testMeetings.length;i++){
-
-        const meetingRow = document.createElement("tr");
-
-        const meetingIdData = document.createElement("td");
-        meetingIdData.innerText = testMeetings[i].meetingId;
-
-        const meetingAddressData = document.createElement("td");
-        meetingAddressData.innerText = testMeetings[i].address;
-        
-        const meetingTimeData = document.createElement("td");
-        const readableDate = new Date(testMeetings[i].time*1000); 
-        meetingTimeData.innerText = readableDate.toLocaleString();
-
-        const meetingSummaryData = document.createElement("td");
-        meetingSummaryData.innerText = testMeetings[i].summary;
-
-        const meetingAttachComplaintBtn = document.createElement("button");
-        meetingAttachComplaintBtn.innerHTML = "Attach Complaint";
-        meetingAttachComplaintBtn.style.width = '100px';
-        meetingAttachComplaintBtn.style.fontSize = '10px';
-
-        meetingRow.appendChild(meetingIdData);
-        meetingRow.appendChild(meetingAddressData);
-        meetingRow.appendChild(meetingTimeData);
-        meetingRow.appendChild(meetingSummaryData);
-        meetingRow.appendChild(meetingAttachComplaintBtn);
-
-        meetingTableBody.appendChild(meetingRow);
-
-    }
- 
-}
-renderMeetingTable();
 </script>
 
 </html>

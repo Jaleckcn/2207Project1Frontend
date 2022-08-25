@@ -29,14 +29,14 @@
         <div class = "center">
             <label for="inputDate">Scheduled meeting date:</label>
 
-            <input type="date" id="inputDate" name="meeting-date" value="2018-06-12">
-            <input type="time" id="inputTime" name="meeting-time" value="19:30">
+            <input type="date" id="inputDate" name="meeting-date" value="2022-08-31">
+            <input type="time" id="inputTime" name="meeting-time" value="12:00">
         </div>
         <div class = "center">
             <label for="inputSummary">Summary</label>
         </div>
         <div class = "center">  
-            <textarea rows="6" cols="50" id = "inputSummary" placeholder="Include complaint ID numbers that will be addressed here"></textarea>
+            <textarea rows="6" cols="50" id = "inputSummary" placeholder="Description of meeting"></textarea>
         </div>  
         </fieldset>
         <div class = "center">
@@ -87,7 +87,7 @@
         })
 
         if(response.status === 201){
-            alert("Meeting has been created");
+            alert("Meeting has been created",'success');
             inputAddress.value = "";
             inputDate.value="";
             inputTime.value = "";
@@ -95,7 +95,7 @@
             console.log(meeting);
             
         }else{
-            alert("Something went wrong!");
+            alert("Something went wrong!",'danger');
         }
     });
 
