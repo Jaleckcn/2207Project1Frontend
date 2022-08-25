@@ -41,7 +41,7 @@
 
 //pulling a list of all meetings that were created from create-meeting html.
 async function getMeetings(){
-    const httpResponse = await fetch("http://localhost:8080/meetings")
+    const httpResponse = await fetch("https://p1-container-app.wonderfultree-db0f85d2.westus3.azurecontainerapps.io/meetings")
     const meetings = await httpResponse.json();
     console.log(meetings);
     return meetings;
@@ -87,7 +87,7 @@ async function renderMeetingTable(){
 
 
     async function getAllComplaints(meetingId){
-    const httpResponse = await fetch(`http://localhost:8080/complaints?meetingId=${meetingId}`);
+    const httpResponse = await fetch(`https://p1-container-app.wonderfultree-db0f85d2.westus3.azurecontainerapps.io/complaints?meetingId=${meetingId}`);
     const complaints = await httpResponse.json();
     let output = "";
 

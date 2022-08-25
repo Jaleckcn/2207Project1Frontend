@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="styles.css">
     <nav>
         <a href = "home-page.html">Musutafu Town Hall Home Page</a> 
-         <a href = "review-complaints.html">View All Submitted Complaints</a>
+        <a href = "review-complaints.html">View All Submitted Complaints</a>
+        <a href="council-member.html">Return to Council Hub</a>
     </nav>
 
     <div id ="liveAlert"></div>
@@ -78,7 +79,7 @@
 
         const meeting = {meetingId:0, address, time:epochDate, summary};
 
-        const response = await fetch("http://localhost:8080/meetings",{
+        const response = await fetch("https://p1-container-app.wonderfultree-db0f85d2.westus3.azurecontainerapps.io/meetings",{
             method:"POST", 
             body: JSON.stringify(meeting),
             headers:{
