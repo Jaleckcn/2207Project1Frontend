@@ -34,7 +34,7 @@ body{
  background-repeat: no-repeat;
  background-size: cover;
 }
-table{
+#table{
     background-color: rgb(172, 195, 238);
     margin-top: 10px;
     margin-left: auto;
